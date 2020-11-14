@@ -33,7 +33,10 @@ suite('UnitTests', () => {
       const input = '..X..5.1.85.4....2432.HI...1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
       const error = "Invalid characters in puzzle";
 
-      // done();
+      var result = solver.validate(input);
+
+      assert.equal(result.error, error);
+      done();
     });
 
     // Puzzles that are not 81 numbers/periods long show the message 
