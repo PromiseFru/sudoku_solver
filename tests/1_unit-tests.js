@@ -70,7 +70,10 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 9;
 
-      // done();
+      var result = solver.checkRowPlacement(input, row, col, value)
+
+      assert.equal(result.valid, false)
+      done();
     });
 
   });
