@@ -58,7 +58,10 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 3;
 
-      // done();
+      var result = solver.checkRowPlacement(input, row, col, value)
+
+      assert.equal(result.valid, true)
+      done();
     });
 
     test('Invalid placement for a row', done => {
