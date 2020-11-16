@@ -25,14 +25,14 @@ class SudokuSolver {
       rowArr.push(text)
     }
 
-    console.log(rowArr)
-    // if (search != -1) return {
-    //   valid: false,
-    //   conflict: ["row"]
-    // };
-    // return {
-    //   valid: true
-    // };
+    var search = rowArr[row].indexOf(value);
+    if (search != -1) return {
+      valid: false,
+      conflict: ["row"]
+    };
+    return {
+      valid: true
+    };
   }
 
   checkColPlacement(puzzleString, row, column, value) {
@@ -47,7 +47,14 @@ class SudokuSolver {
       colArr.push(text)
     }
 
-    console.log(colArr)
+    var search = colArr[column].indexOf(value);
+    if (search != -1) return {
+      valid: false,
+      conflict: ["column"]
+    };
+    return {
+      valid: true
+    };
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
@@ -88,7 +95,14 @@ class SudokuSolver {
 
     var regArr = reg1.concat(reg2, reg3);
 
-    console.log(regArr)
+    var search = regArr[column].indexOf(value);
+    if (search != -1) return {
+      valid: false,
+      conflict: ["column"]
+    };
+    return {
+      valid: true
+    };
   }
 
   solve(puzzleString) {
