@@ -15,12 +15,12 @@ class SudokuSolver {
 
   checkRowPlacement(puzzleString, row, column, value) {
     var rowArr = [];
-    var i,j;
+    var i, j;
 
-    for(i = 0; i < 81; i+=9) {
+    for (i = 0; i < 81; i += 9) {
       var text = "";
-      for(j = 0; j < 9; j++) {
-        text += puzzleString.charAt(i+j);
+      for (j = 0; j < 9; j++) {
+        text += puzzleString.charAt(i + j);
       }
       rowArr.push(text)
     }
@@ -36,11 +36,18 @@ class SudokuSolver {
   }
 
   checkColPlacement(puzzleString, row, column, value) {
-    var puzzleRow = puzzleString.match(/.{9}/g);
-    var puzzleCol;
-    puzzleRow.forEach(ele => puzzleCol = ele.match(/.{1}/g));
+    var colArr = [];
+    var i, j;
 
-    console.log(puzzleCol);
+    for (i = 0; i < 9; i++) {
+      var text = "";
+      for (j = 0; j < 81; j += 9) {
+        text += puzzleString.charAt(i + j);
+      }
+      colArr.push(text)
+    }
+
+    console.log(colArr)
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
@@ -57,6 +64,7 @@ const row = 0;
 const col = 0;
 const value = 9;
 
-new SudokuSolver().checkRowPlacement(input, row, col, value)
+new SudokuSolver().checkRowPlacement(input, row, col, value);
+new SudokuSolver().checkColPlacement(input, row, col, value)
 
 module.exports = SudokuSolver;
