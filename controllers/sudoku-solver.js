@@ -51,7 +51,44 @@ class SudokuSolver {
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
+    var reg1 = []
+    var reg2 = []
+    var reg3 = [];
+    var i, j, k;
 
+    for (i = 0; i < 9; i += 3) {
+      var text = "";
+      for (j = 0; j < 27; j += 9) {
+        for (k = 0; k < 3; k++) {
+          text += puzzleString.charAt(i + j + k);
+        }
+      }
+      reg1.push(text)
+    }
+
+    for (i = 27; i < 36; i += 3) {
+      var text = "";
+      for (j = 0; j < 27; j += 9) {
+        for (k = 0; k < 3; k++) {
+          text += puzzleString.charAt(i + j + k);
+        }
+      }
+      reg2.push(text)
+    }
+
+    for (i = 54; i < 63; i += 3) {
+      var text = "";
+      for (j = 0; j < 27; j += 9) {
+        for (k = 0; k < 3; k++) {
+          text += puzzleString.charAt(i + j + k);
+        }
+      }
+      reg3.push(text)
+    }
+
+    var regArr = reg1.concat(reg2, reg3);
+
+    console.log(regArr)
   }
 
   solve(puzzleString) {
@@ -66,5 +103,7 @@ const value = 9;
 
 new SudokuSolver().checkRowPlacement(input, row, col, value);
 new SudokuSolver().checkColPlacement(input, row, col, value)
+new SudokuSolver().checkRegionPlacement(input, row, col, value)
+
 
 module.exports = SudokuSolver;
