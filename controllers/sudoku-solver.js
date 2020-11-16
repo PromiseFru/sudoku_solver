@@ -14,20 +14,33 @@ class SudokuSolver {
   }
 
   checkRowPlacement(puzzleString, row, column, value) {
-    var puzzleArr = puzzleString.match(/.{9}/g);
+    var rowArr = [];
+    var i,j;
 
-    var search = puzzleArr[row].indexOf(value)
-    if (search != -1) return {
-      valid: false,
-      conflict: ["row"]
-    };
-    return {
-      valid: true
-    };
+    for(i = 0; i < 81; i+=9) {
+      var text = "";
+      for(j = 0; j < 9; j++) {
+        text += puzzleString.charAt(i+j);
+      }
+      rowArr.push(text)
+    }
+
+    console.log(rowArr)
+    // if (search != -1) return {
+    //   valid: false,
+    //   conflict: ["row"]
+    // };
+    // return {
+    //   valid: true
+    // };
   }
 
   checkColPlacement(puzzleString, row, column, value) {
+    var puzzleRow = puzzleString.match(/.{9}/g);
+    var puzzleCol;
+    puzzleRow.forEach(ele => puzzleCol = ele.match(/.{1}/g));
 
+    console.log(puzzleCol);
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
@@ -38,5 +51,12 @@ class SudokuSolver {
 
   }
 }
+
+const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+const row = 0;
+const col = 0;
+const value = 9;
+
+new SudokuSolver().checkRowPlacement(input, row, col, value)
 
 module.exports = SudokuSolver;
