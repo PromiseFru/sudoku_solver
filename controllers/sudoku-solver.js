@@ -95,10 +95,38 @@ class SudokuSolver {
 
     var regArr = reg1.concat(reg2, reg3);
 
-    var search = regArr[column].indexOf(value);
+    if (row >= 0 && row <= 2 && column >= 0 && column <= 2) {
+      var search = regArr[0].indexOf(value);
+    }
+    if (row >= 0 && row <= 2 && column >= 3 && column <= 5) {
+      var search = regArr[1].indexOf(value);
+    }
+    if (row >= 0 && row <= 2 && column >= 6 && column <= 8) {
+      var search = regArr[2].indexOf(value);
+    }
+    if (row >= 3 && row <= 5 && column >= 0 && column <= 2) {
+      var search = regArr[3].indexOf(value);
+    }
+    if (row >= 3 && row <= 5 && column >= 3 && column <= 5) {
+      var search = regArr[4].indexOf(value);
+    }
+    if (row >= 3 && row <= 5 && column >= 6 && column <= 8) {
+      var search = regArr[5].indexOf(value);
+    }
+    if (row >= 6 && row <= 8 && column >= 0 && column <= 2) {
+      var search = regArr[6].indexOf(value);
+    }
+    if (row >= 6 && row <= 8 && column >= 3 && column <= 5) {
+      var search = regArr[7].indexOf(value);
+    }
+    if (row >= 6 && row <= 8 && column >= 6 && column <= 8) {
+      var search = regArr[8].indexOf(value);
+    }
+
+    console.log(search);
     if (search != -1) return {
       valid: false,
-      conflict: ["column"]
+      conflict: ["region"]
     };
     return {
       valid: true
@@ -111,9 +139,9 @@ class SudokuSolver {
 }
 
 const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
-const row = 0;
-const col = 0;
-const value = 9;
+const row = 1;
+const col = 1;
+const value = 3;
 
 new SudokuSolver().checkRowPlacement(input, row, col, value);
 new SudokuSolver().checkColPlacement(input, row, col, value)
