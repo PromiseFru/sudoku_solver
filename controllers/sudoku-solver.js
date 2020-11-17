@@ -123,7 +123,6 @@ class SudokuSolver {
       var search = regArr[8].indexOf(value);
     }
 
-    console.log(search);
     if (search != -1) return {
       valid: false,
       conflict: ["region"]
