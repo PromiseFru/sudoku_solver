@@ -142,9 +142,10 @@ const row = 1;
 const col = 1;
 const value = 3;
 
-new SudokuSolver().checkRowPlacement(input, row, col, value);
-new SudokuSolver().checkColPlacement(input, row, col, value)
-new SudokuSolver().checkRegionPlacement(input, row, col, value)
+// new SudokuSolver().checkRowPlacement(input, row, col, value);
+// new SudokuSolver().checkColPlacement(input, row, col, value)
+// new SudokuSolver().checkRegionPlacement(input, row, col, value)
+// new SudokuSolver().solve(input);
 
 
 module.exports = SudokuSolver;
