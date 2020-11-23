@@ -26,29 +26,26 @@ class SudokuSolver {
       board.push(boardRow)
     }
 
-    console.log(board[0]);
+    console.log(board);
+    return board;
   }
 
   checkRowPlacement(puzzleString, row, column, value) {
-    var rowArr = [];
-    var i, j;
+    var board = this.boardParser(puzzleString);
 
-    for (i = 0; i < 81; i += 9) {
-      var text = "";
-      for (j = 0; j < 9; j++) {
-        text += puzzleString.charAt(i + j);
+    var i;
+    for (i = 0; i < 9; i++) {
+      if (board[row][i] == value) {
+        console.log(false);
+        return {
+          valid: false
+        };
       }
-      rowArr.push(text)
     }
-
-    var search = rowArr[row].indexOf(value);
-    if (search != -1) return {
-      valid: false,
-      conflict: ["row"]
-    };
+    console.log(true);
     return {
       valid: true
-    };
+    }
   }
 
   checkColPlacement(puzzleString, row, column, value) {
@@ -154,11 +151,11 @@ class SudokuSolver {
 }
 
 const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
-const row = 1;
+const row = 0;
 const col = 1;
-const value = 3;
+const value = 9;
 
-// new SudokuSolver().checkRowPlacement(input, row, col, value);
+new SudokuSolver().checkRowPlacement(input, row, col, value);
 // new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
 new SudokuSolver().boardParser(input);
