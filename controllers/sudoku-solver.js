@@ -54,89 +54,36 @@ class SudokuSolver {
 
     for (i = 0; i < 9; i++) {
       if (board[i][column] == value) {
-        console.log(false)
+        // console.log(false)
         return {
           valid: false
         }
       }
     }
-    console.log(true)
+    // console.log(true)
     return true;
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
-    var reg1 = []
-    var reg2 = []
-    var reg3 = [];
-    var i, j, k;
+    var board = this.boardParser(puzzleString);
+    var i, j;
+    var regRow = Math.floor(row / 3) * 3;
+    var regCol = Math.floor(col / 3) * 3;
 
-    for (i = 0; i < 9; i += 3) {
-      var text = "";
-      for (j = 0; j < 27; j += 9) {
-        for (k = 0; k < 3; k++) {
-          text += puzzleString.charAt(i + j + k);
+    for (i = 0; i < 3; i++) {
+      for (j = 0; j < 3; j++) {
+        if (board[regRow + i][regCol + j] == value) {
+          console.log(false)
+          return {
+            valid: false
+          }
         }
       }
-      reg1.push(text)
     }
-
-    for (i = 27; i < 36; i += 3) {
-      var text = "";
-      for (j = 0; j < 27; j += 9) {
-        for (k = 0; k < 3; k++) {
-          text += puzzleString.charAt(i + j + k);
-        }
-      }
-      reg2.push(text)
-    }
-
-    for (i = 54; i < 63; i += 3) {
-      var text = "";
-      for (j = 0; j < 27; j += 9) {
-        for (k = 0; k < 3; k++) {
-          text += puzzleString.charAt(i + j + k);
-        }
-      }
-      reg3.push(text)
-    }
-
-    var regArr = reg1.concat(reg2, reg3);
-
-    if (row >= 0 && row <= 2 && column >= 0 && column <= 2) {
-      var search = regArr[0].indexOf(value);
-    }
-    if (row >= 0 && row <= 2 && column >= 3 && column <= 5) {
-      var search = regArr[1].indexOf(value);
-    }
-    if (row >= 0 && row <= 2 && column >= 6 && column <= 8) {
-      var search = regArr[2].indexOf(value);
-    }
-    if (row >= 3 && row <= 5 && column >= 0 && column <= 2) {
-      var search = regArr[3].indexOf(value);
-    }
-    if (row >= 3 && row <= 5 && column >= 3 && column <= 5) {
-      var search = regArr[4].indexOf(value);
-    }
-    if (row >= 3 && row <= 5 && column >= 6 && column <= 8) {
-      var search = regArr[5].indexOf(value);
-    }
-    if (row >= 6 && row <= 8 && column >= 0 && column <= 2) {
-      var search = regArr[6].indexOf(value);
-    }
-    if (row >= 6 && row <= 8 && column >= 3 && column <= 5) {
-      var search = regArr[7].indexOf(value);
-    }
-    if (row >= 6 && row <= 8 && column >= 6 && column <= 8) {
-      var search = regArr[8].indexOf(value);
-    }
-
-    if (search != -1) return {
-      valid: false,
-      conflict: ["region"]
-    };
+    console.log(true);
     return {
       valid: true
-    };
+    }
   }
 
   solve(puzzleString) {
@@ -147,11 +94,11 @@ class SudokuSolver {
 const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
 const row = 0;
 const col = 1;
-const value = 3;
+const value = 7;
 
 new SudokuSolver().checkRowPlacement(input, row, col, value);
 new SudokuSolver().checkColPlacement(input, row, col, value)
-// new SudokuSolver().checkRegionPlacement(input, row, col, value)
+new SudokuSolver().checkRegionPlacement(input, row, col, value)
 new SudokuSolver().boardParser(input);
 
 
