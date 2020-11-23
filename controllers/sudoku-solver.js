@@ -36,38 +36,32 @@ class SudokuSolver {
     var i;
     for (i = 0; i < 9; i++) {
       if (board[row][i] == value) {
-        console.log(false);
+        // console.log(false);
         return {
           valid: false
         };
       }
     }
-    console.log(true);
+    // console.log(true);
     return {
       valid: true
     }
   }
 
   checkColPlacement(puzzleString, row, column, value) {
-    var colArr = [];
-    var i, j;
+    var i;
+    var board = this.boardParser(puzzleString);
 
     for (i = 0; i < 9; i++) {
-      var text = "";
-      for (j = 0; j < 81; j += 9) {
-        text += puzzleString.charAt(i + j);
+      if (board[i][column] == value) {
+        console.log(false)
+        return {
+          valid: false
+        }
       }
-      colArr.push(text)
     }
-
-    var search = colArr[column].indexOf(value);
-    if (search != -1) return {
-      valid: false,
-      conflict: ["column"]
-    };
-    return {
-      valid: true
-    };
+    console.log(true)
+    return true;
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
@@ -153,10 +147,10 @@ class SudokuSolver {
 const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
 const row = 0;
 const col = 1;
-const value = 9;
+const value = 3;
 
 new SudokuSolver().checkRowPlacement(input, row, col, value);
-// new SudokuSolver().checkColPlacement(input, row, col, value)
+new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
 new SudokuSolver().boardParser(input);
 
