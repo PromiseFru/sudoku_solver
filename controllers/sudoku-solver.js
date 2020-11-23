@@ -13,6 +13,22 @@ class SudokuSolver {
     return puzzleString;
   }
 
+  boardParser(puzzleString) {
+    var board = [];
+    var i, j;
+    var k = 0;
+
+    for (i = 0; i < 81; i += 9) {
+      var boardRow = [];
+      for (j = 0; j < 9; j++) {
+        boardRow.push(puzzleString.charAt(i + j));
+      }
+      board.push(boardRow)
+    }
+
+    console.log(board[0]);
+  }
+
   checkRowPlacement(puzzleString, row, column, value) {
     var rowArr = [];
     var i, j;
@@ -145,7 +161,7 @@ const value = 3;
 // new SudokuSolver().checkRowPlacement(input, row, col, value);
 // new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
-// new SudokuSolver().solve(input);
+new SudokuSolver().boardParser(input);
 
 
 module.exports = SudokuSolver;
