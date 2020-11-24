@@ -101,12 +101,12 @@ class SudokuSolver {
   }
 
   checkvalue(puzzleString, row, column, value) {
-    if (this.checkRowPlacement(puzzleString, row, column, value) && this.checkColPlacement(puzzleString, row, column, value) && this.checkRegionPlacement(puzzleString, row, column, value)) {
+    if (this.checkRowPlacement(puzzleString, row, column, value).valid && this.checkColPlacement(puzzleString, row, column, value).valid && this.checkRegionPlacement(puzzleString, row, column, value).valid) {
       return true;
     }
     return false;
   }
-  
+
   solve(puzzleString) {
 
   }
