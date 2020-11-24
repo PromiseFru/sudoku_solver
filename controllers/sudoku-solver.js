@@ -100,6 +100,13 @@ class SudokuSolver {
     }
   }
 
+  checkvalue(puzzleString, row, column, value) {
+    if (this.checkRowPlacement(puzzleString, row, column, value) && this.checkColPlacement(puzzleString, row, column, value) && this.checkRegionPlacement(puzzleString, row, column, value)) {
+      return true;
+    }
+    return false;
+  }
+  
   solve(puzzleString) {
 
   }
