@@ -30,6 +30,20 @@ class SudokuSolver {
     return board;
   }
 
+  getDot(puzzleString) {
+    var board = this.boardParser(puzzleString);
+    var i, j;
+
+    for (i = 0; i < 9; i++) {
+      for (j = 0; j < 9; j++) {
+        if (board[i][j] == ".") {
+          return [i, j];
+        }
+      }
+    }
+    return [-1, -1];
+  }
+
   checkRowPlacement(puzzleString, row, column, value) {
     var board = this.boardParser(puzzleString);
 
@@ -73,14 +87,14 @@ class SudokuSolver {
     for (i = 0; i < 3; i++) {
       for (j = 0; j < 3; j++) {
         if (board[regRow + i][regCol + j] == value) {
-          console.log(false)
+          // console.log(false)
           return {
             valid: false
           }
         }
       }
     }
-    console.log(true);
+    // console.log(true);
     return {
       valid: true
     }
