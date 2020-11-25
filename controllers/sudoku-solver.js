@@ -107,7 +107,7 @@ class SudokuSolver {
     var colCheck = this.checkColPlacement(puzzleString, row, column, value).valid
     var regCheck = this.checkRegionPlacement(puzzleString, row, column, value).valid
     // console.log(rowCheck, colCheck, regCheck);
-    
+
     if (rowCheck && colCheck && regCheck) {
       // console.log(true)
       return true;
@@ -116,30 +116,46 @@ class SudokuSolver {
     return false;
   }
 
+  stringifyBoard(board) {
+    var string = ""
+    var i, j;
+
+    for (i = 0; i < 9; i++) {
+      for (j = 0; j < 9; j++) {
+        string += board[i][j];
+      }
+    }
+
+    console.log(string);
+    return string;
+  }
+
   solve(puzzleString) {
     var board = this.boardParser(puzzleString)
+    var boardString;
     var emptySpot = this.getDot(puzzleString);
     var row = emptySpot[0];
     var column = emptySpot[1];
     var i;
 
     if (row == -1) {
-      return board
+      return boardString
     }
 
     for (i = 1; i <= 9; i++) {
       if (this.checkvalue(puzzleString, row, column, i)) {
         board[row][column] = i;
-        this.solve(puzzleString);
+        boardString = this.stringifyBoard(board);
+        this.solve(boardString);
       }
     }
 
-    // if (row != -1) {
-    //   board[row][column] = ".";
-    // }
+    if (row != -1) {
+      board[row][column] = ".";
+    }
 
-    console.log(board);
-    return board;
+    console.log(boardString);
+    return boardString;
   }
 }
 
