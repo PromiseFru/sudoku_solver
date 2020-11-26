@@ -30,8 +30,7 @@ class SudokuSolver {
     return board;
   }
 
-  getDot(puzzleString) {
-    var board = this.boardParser(puzzleString);
+  getDot(board) {
     var i, j;
 
     for (i = 0; i < 9; i++) {
@@ -44,9 +43,7 @@ class SudokuSolver {
     return [-1, -1];
   }
 
-  checkRowPlacement(puzzleString, row, column, value) {
-    var board = this.boardParser(puzzleString);
-
+  checkRowPlacement(board, row, column, value) {
     var i;
     for (i = 0; i < 9; i++) {
       if (board[row][i] == value) {
@@ -62,9 +59,8 @@ class SudokuSolver {
     }
   }
 
-  checkColPlacement(puzzleString, row, column, value) {
+  checkColPlacement(board, row, column, value) {
     var i;
-    var board = this.boardParser(puzzleString);
 
     for (i = 0; i < 9; i++) {
       if (board[i][column] == value) {
@@ -80,8 +76,7 @@ class SudokuSolver {
     };
   }
 
-  checkRegionPlacement(puzzleString, row, column, value) {
-    var board = this.boardParser(puzzleString);
+  checkRegionPlacement(board, row, column, value) {
     var i, j;
     var regRow = Math.floor(row / 3) * 3;
     var regCol = Math.floor(column / 3) * 3;
@@ -102,10 +97,10 @@ class SudokuSolver {
     }
   }
 
-  checkvalue(puzzleString, row, column, value) {
-    var rowCheck = this.checkRowPlacement(puzzleString, row, column, value).valid
-    var colCheck = this.checkColPlacement(puzzleString, row, column, value).valid
-    var regCheck = this.checkRegionPlacement(puzzleString, row, column, value).valid
+  checkvalue(board, row, column, value) {
+    var rowCheck = this.checkRowPlacement(board, row, column, value).valid
+    var colCheck = this.checkColPlacement(board, row, column, value).valid
+    var regCheck = this.checkRegionPlacement(board, row, column, value).valid
     // console.log(rowCheck, colCheck, regCheck);
 
     if (rowCheck && colCheck && regCheck) {
@@ -126,40 +121,45 @@ class SudokuSolver {
       }
     }
 
-    console.log(string);
+    // console.log(string);
     return string;
   }
 
+  solved(board) {
+    var i, j;
+
+    if (this.getDot(board)[0] == -1) {
+      return true
+    }
+    return false
+  }
+
   solve(puzzleString) {
-    var board = this.boardParser(puzzleString)
-    var boardString;
-    var emptySpot = this.getDot(puzzleString);
-    var row = emptySpot[0];
-    var column = emptySpot[1];
-    var i;
+    // var board = this.boardParser(puzzleString)
+    // var emptySpot = this.getDot(board);
+    // var row = emptySpot[0];
+    // var column = emptySpot[1];
+    // var i;
 
-    if (row == -1) {
-      return boardString
-    }
+    // for (i = 1; i <= 9; i++) {
+    //   if (this.checkvalue(board, row, column, i)) {
+    //     board[row][column] = i;
+    //     var boardString = this.stringifyBoard(board);
+    //     if (this.solved(board)) {
+    //       // console.log(puzzleString)
+    //       return boardString;
+    //       break;
+    //     }      
+    //     console.log(boardString)
+    //     this.solve(boardString);
+    //   }
+    // }
 
-    for (i = 1; i <= 9; i++) {
-      if (this.checkvalue(puzzleString, row, column, i)) {
-        board[row][column] = i;
-        boardString = this.stringifyBoard(board);
-        this.solve(boardString);
-      }
-    }
-
-    if (row != -1) {
-      board[row][column] = ".";
-    }
-
-    console.log(boardString);
-    return boardString;
+    // return false;
   }
 }
 
-const input = '..839.7.575.....964..1.......16.29846.9.312.7..754.....62..5.78.8...3.2...492...1';
+const input = '5..91372.3...8.5.9.9.25..8.68.47.23...95..46.7.4.....5.2.......4..8916..85.72...3';
 const row = 1;
 const col = 0;
 const value = 3;
@@ -168,7 +168,7 @@ const value = 3;
 // new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
 // new SudokuSolver().boardParser(input);
-new SudokuSolver().solve(input);
+console.log(new SudokuSolver().solve(input));
 // new SudokuSolver().checkvalue(input, row, col, value)
 
 
