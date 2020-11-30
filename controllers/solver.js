@@ -35,3 +35,29 @@ function solved(board) {
     return true;
 }
 
+function nextBoards(board) {
+    var res = [];
+    const firstEmpty = findEmptySquare(board);
+    if (firstEmpty != undefined) {
+        const y = firstEmpty[0];
+        const x = firstEmpty[1];
+        for (var i = 1; i <= 9; i++) {
+            var newBoard = [...board];
+            var row = [...newBoard[y]]
+            row[x] = i;
+            newBoard[y] = row;
+            res.push(newBoard);
+        }
+    }
+    return res;
+}
+
+function firstEmptySquare(board) {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            if (board[i][j] == ".") {
+                return [i, j];
+            }
+        }
+    }
+}
