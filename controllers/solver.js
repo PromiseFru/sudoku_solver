@@ -1,9 +1,27 @@
-function solve(boards) {
+function boardParser(puzzleString) {
+    var board = [];
+    var i, j;
+    var k = 0;
+
+    for (i = 0; i < 81; i += 9) {
+        var boardRow = [];
+        for (j = 0; j < 9; j++) {
+            boardRow.push(puzzleString.charAt(i + j));
+        }
+        board.push(boardRow)
+    }
+
+    // console.log(board);
+    return board;
+}
+
+function solve(puzzleString) {
+    var board = boardParser(puzzleString)
     // check if board is solved
     if (solved(board)) {
         return board
     } else {
-        const posibilities = nextBoards(boards);
+        const posibilities = nextBoards(board);
         const validBoards = keepOnlyValid(posibilities);
         return searchForSolution(validBoards);
     }
