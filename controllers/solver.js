@@ -61,3 +61,61 @@ function firstEmptySquare(board) {
         }
     }
 }
+
+function keepOnlyValid(boards) {
+    return boards.filter(b => validBoard(b))
+}
+
+function validBoard(board) {
+    return checkRowPlacement(board).valid && checkColPlacement(board).valid && checkRegionPlacement(board).valid;
+}
+
+function checkRowPlacement(board, row, value) {
+    for (var i = 0; i < 9; i++) {
+        if (board[row][i] == value) {
+            // console.log("row check false");
+            return {
+                valid: false
+            };
+        }
+    }
+    // console.log("row check true");
+    return {
+        valid: true
+    }
+}
+
+function checkColPlacement(board, column, value) {
+    for (var i = 0; i < 9; i++) {
+        if (board[i][column] == value) {
+            // console.log("col check false")
+            return {
+                valid: false
+            }
+        }
+    }
+    // console.log("col check true")
+    return {
+        valid: true
+    };
+}
+
+function checkRegionPlacement(board, row, column, value) {
+    var regRow = Math.floor(row / 3) * 3;
+    var regCol = Math.floor(column / 3) * 3;
+
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            if (board[regRow + i][regCol + j] == value) {
+                // console.log("reg check false")
+                return {
+                    valid: false
+                }
+            }
+        }
+    }
+    // console.log("reg check true");
+    return {
+        valid: true
+    }
+}
