@@ -23,3 +23,15 @@ function searchForSolution(boards) {
         }
     }
 }
+
+function solved(board) {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            if (board[i][j] == ".") {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
