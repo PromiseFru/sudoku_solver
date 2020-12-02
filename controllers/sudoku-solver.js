@@ -125,9 +125,8 @@ class SudokuSolver {
     return string;
   }
 
+  // if no more empty spaces on board return true
   solved(board) {
-    var i, j;
-
     if (this.getDot(board)[0] == -1) {
       return true
     }
@@ -135,27 +134,30 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-    // var board = this.boardParser(puzzleString)
-    // var emptySpot = this.getDot(board);
-    // var row = emptySpot[0];
-    // var column = emptySpot[1];
-    // var i;
+    var board = this.boardParser(puzzleString)
+    var emptySpot = this.getDot(board);
+    var row = emptySpot[0];
+    var column = emptySpot[1];
 
-    // for (i = 1; i <= 9; i++) {
-    //   if (this.checkvalue(board, row, column, i)) {
-    //     board[row][column] = i;
-    //     var boardString = this.stringifyBoard(board);
-    //     if (this.solved(board)) {
-    //       // console.log(puzzleString)
-    //       return boardString;
-    //       break;
-    //     }      
-    //     console.log(boardString)
-    //     this.solve(boardString);
-    //   }
-    // }
+    // check if solved function returns true then return solved board
+    if (this.solved(board)) {
+      return puzzleString;
+    }
 
-    // return false;
+    for (var i = 1; i <= 9; i++) {
+      if (this.checkvalue(board, row, column, i)) {
+        board[row][column] = i;
+        var boardString = this.stringifyBoard(board);
+        var result = this.solve(boardString);
+
+        //  Check for full board at every recursion
+        if (result != 'Invalid Board') {
+          return result;
+        }
+      }
+    }
+
+    return 'Invalid Board';
   }
 }
 
