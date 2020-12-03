@@ -147,6 +147,17 @@ class SudokuSolver {
 
     // check if solved function returns true then return solved board
     if (this.solved(board)) {
+      // check if solution string is valid
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          var temp = board[i][j];
+          board[i][j] = "."
+          if (!this.checkvalue(board, i, j, temp)) {
+            return "Invalid Solution";
+          }
+          board[i][j] = temp;
+        }
+      }
       return vString;
     }
 
@@ -168,11 +179,11 @@ class SudokuSolver {
 }
 
 const input = '5..91372.3...8.5.9.9.25..8.68.47.23...95..46.7.4.....5.2.......4..8916..85.72...3';
-const row = 1;
+const row = 0;
 const col = 0;
-const value = 3;
+const value = 5;
 
-// new SudokuSolver().checkRowPlacement(input, row, col, value);
+// console.log(new SudokuSolver().checkRowPlacement(input, row, col, value));
 // new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
 // new SudokuSolver().boardParser(input);
