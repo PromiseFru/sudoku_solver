@@ -134,14 +134,20 @@ class SudokuSolver {
   }
 
   solve(puzzleString) {
-    var board = this.boardParser(puzzleString)
+    // validate puzzle string
+    var vString = this.validate(puzzleString);
+    if (vString.error) {
+      return vString.error
+    }
+
+    var board = this.boardParser(vString)
     var emptySpot = this.getDot(board);
     var row = emptySpot[0];
     var column = emptySpot[1];
 
     // check if solved function returns true then return solved board
     if (this.solved(board)) {
-      return puzzleString;
+      return vString;
     }
 
     for (var i = 1; i <= 9; i++) {
