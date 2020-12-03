@@ -187,7 +187,7 @@ const value = 5;
 // new SudokuSolver().checkColPlacement(input, row, col, value)
 // new SudokuSolver().checkRegionPlacement(input, row, col, value)
 // new SudokuSolver().boardParser(input);
-console.log(new SudokuSolver().solve(input));
+// console.log(new SudokuSolver().solve(input));
 // new SudokuSolver().checkvalue(input, row, col, value)
 
 
