@@ -53,7 +53,8 @@ suite('UnitTests', () => {
 
   suite('Function checkRowPlacement()', () => {
     test('Valid placement for a row', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 0;
       const col = 0;
       const value = 3;
@@ -65,12 +66,13 @@ suite('UnitTests', () => {
     });
 
     test('Invalid placement for a row', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 0;
       const col = 0;
       const value = 9;
 
-      var result = solver.checkRowPlacement(input, row, col, value)
+      var result = solver.checkRowPlacement(input, row, col, value);
 
       assert.equal(result.valid, false)
       done();
@@ -80,7 +82,8 @@ suite('UnitTests', () => {
 
   suite('Function checkColPlacement()', () => {
     test('Valid placement for a column', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 0;
       const col = 0;
       const value = 3;
@@ -92,7 +95,8 @@ suite('UnitTests', () => {
     });
 
     test('Invalid placement for a column', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 0;
       const col = 0;
       const value = 1;
@@ -107,7 +111,8 @@ suite('UnitTests', () => {
 
   suite('Function checkRegionPlacement()', () => {
     test('Valid placement for a region', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 4;
       const col = 4;
       const value = 3;
@@ -119,7 +124,8 @@ suite('UnitTests', () => {
     });
 
     test('Invalid placement for a region', done => {
-      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const string = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..6..';
+      const input = solver.boardParser(string);
       const row = 4;
       const col = 4;
       const value = 7;
