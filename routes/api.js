@@ -38,7 +38,8 @@ module.exports = function (app) {
         })
       }
 
-      solver.solve(puzzleString)
-
+      return res.json({
+        solution: solver.solve(vString)
+      })
     });
 };

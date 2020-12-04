@@ -147,7 +147,9 @@ class SudokuSolver {
           var temp = board[i][j];
           board[i][j] = "."
           if (!this.checkvalue(board, i, j, temp)) {
-            return "Invalid Solution";
+            return {
+              error: 'Puzzle cannot be solved'
+            };
           }
           board[i][j] = temp;
         }
@@ -162,17 +164,19 @@ class SudokuSolver {
         var result = this.solve(boardString);
 
         //  Check for full board at every recursion
-        if (result != 'Invalid Board') {
+        if (!result.error) {
           return result;
         }
       }
     }
 
-    return 'Invalid Board';
+    return {
+      error: 'Puzzle cannot be solved'
+    };
   }
 }
 
-const input = '5..91372.3...8.5.9.9.25..8.68.47.23...95..46.7.4.....5.2.......4..8916..85.72...3';
+const input = '5...1372.3...8.5.9.9.25..8.68.47.23...95..46.7.4.....5.2.......4..8916..85.72...3';
 const row = 0;
 const col = 0;
 const value = 5;
