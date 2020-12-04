@@ -38,6 +38,8 @@ module.exports = function (app) {
         })
       }
 
+      var board = solver.boardParser(vString);
+
       var rowCheck = row.match(/[^a-i]/g)
       var colCheck = column.match(/[^1-9]/g)
 
@@ -61,27 +63,24 @@ module.exports = function (app) {
 
       switch (row) {
         case 'a': {
-          var conflict= [];
+          var conflict = [];
 
-          if (solver.checkRowPlacement(vString, 0, column - 1, value)) {
-            return res.json({
-              valid: true
-            })
+          var CRP = solver.checkRowPlacement(board, 0, value);
+          var CCP = solver.checkColPlacement(board, column - 1, value);
+          var CBP = solver.checkRegionPlacement(board, 0, column - 1, value);
+          var CV = solver.checkvalue(board, 0, column - 1, value);
+
+          if (!CRP.valid) {
+            conflict.push(CRP.conflict)
+          }
+          if (!CCP.valid) {
+            conflict.push(CCP.conflict)
+          }
+          if (!CBP.valid) {
+            conflict.push(CBP.conflict)
           }
 
-          if (solver.checkvalue(vString, 0, column - 1, value)) {
-            return res.json({
-              valid: true
-            })
-          }
-
-          if (solver.checkvalue(vString, 0, column - 1, value)) {
-            return res.json({
-              valid: true
-            })
-          }
-
-          if (solver.checkvalue(vString, 0, column - 1, value)) {
+          if (CV) {
             return res.json({
               valid: true
             })

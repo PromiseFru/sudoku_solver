@@ -43,13 +43,14 @@ class SudokuSolver {
     return [-1, -1];
   }
 
-  checkRowPlacement(board, row, column, value) {
+  checkRowPlacement(board, row, value) {
     var i;
     for (i = 0; i < 9; i++) {
       if (board[row][i] == value) {
         // console.log("row check false");
         return {
-          valid: false
+          valid: false,
+          conflict: 'row'
         };
       }
     }
@@ -59,14 +60,15 @@ class SudokuSolver {
     }
   }
 
-  checkColPlacement(board, row, column, value) {
+  checkColPlacement(board, column, value) {
     var i;
 
     for (i = 0; i < 9; i++) {
       if (board[i][column] == value) {
         // console.log("col check false")
         return {
-          valid: false
+          valid: false,
+          conflict: 'column'
         }
       }
     }
@@ -86,7 +88,8 @@ class SudokuSolver {
         if (board[regRow + i][regCol + j] == value) {
           // console.log("reg check false")
           return {
-            valid: false
+            valid: false,
+            conflict: 'region'
           }
         }
       }
@@ -98,8 +101,8 @@ class SudokuSolver {
   }
 
   checkvalue(board, row, column, value) {
-    var rowCheck = this.checkRowPlacement(board, row, column, value).valid
-    var colCheck = this.checkColPlacement(board, row, column, value).valid
+    var rowCheck = this.checkRowPlacement(board, row, value).valid
+    var colCheck = this.checkColPlacement(board, column, value).valid
     var regCheck = this.checkRegionPlacement(board, row, column, value).valid
     // console.log(rowCheck, colCheck, regCheck);
 
