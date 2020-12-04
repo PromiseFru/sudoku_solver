@@ -38,6 +38,12 @@ module.exports = function (app) {
         })
       }
 
+      if (solver.solve(vString).error) {
+        return res.json({
+          error: solver.solve(vString).error
+        })
+      }
+
       return res.json({
         solution: solver.solve(vString)
       })
