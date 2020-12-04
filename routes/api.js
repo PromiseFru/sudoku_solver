@@ -22,6 +22,7 @@ module.exports = function (app) {
       var splitCor = coordinate.split('');
       var row = splitCor[0].toLowerCase();
       var column = splitCor[1];
+      var rowH
 
       // empty puzzle string
       if (!puzzle) {
@@ -61,37 +62,44 @@ module.exports = function (app) {
         })
       }
 
-      switch (row) {
-        case 'a': {
-          var conflict = [];
+      if(row == 'a') rowH = 0;
+      if(row == 'b') rowH = 1;
+      if(row == 'c') rowH = 2;
+      if(row == 'd') rowH = 3;
+      if(row == 'e') rowH = 4;
+      if(row == 'f') rowH = 5;
+      if(row == 'g') rowH = 6;
+      if(row == 'h') rowH = 7;
+      if(row == 'i') rowH = 8;
 
-          var CRP = solver.checkRowPlacement(board, 0, value);
-          var CCP = solver.checkColPlacement(board, column - 1, value);
-          var CBP = solver.checkRegionPlacement(board, 0, column - 1, value);
-          var CV = solver.checkvalue(board, 0, column - 1, value);
+      var conflict = [];
 
-          if (!CRP.valid) {
-            conflict.push(CRP.conflict)
-          }
-          if (!CCP.valid) {
-            conflict.push(CCP.conflict)
-          }
-          if (!CBP.valid) {
-            conflict.push(CBP.conflict)
-          }
+      var CRP = solver.checkRowPlacement(board, rowH, value);
+      var CCP = solver.checkColPlacement(board, column - 1, value);
+      var CBP = solver.checkRegionPlacement(board, rowH, column - 1, value);
+      var CV = solver.checkvalue(board, rowH, column - 1, value);
 
-          if (CV) {
-            return res.json({
-              valid: true
-            })
-          }
-
-          return res.json({
-            valid: false,
-            conflict: conflict
-          })
-        }
+      if (!CRP.valid) {
+        conflict.push(CRP.conflict)
       }
+      if (!CCP.valid) {
+        conflict.push(CCP.conflict)
+      }
+      if (!CBP.valid) {
+        conflict.push(CBP.conflict)
+      }
+
+      if (CV) {
+        return res.json({
+          valid: true
+        })
+      }
+
+      return res.json({
+        valid: false,
+        conflict: conflict
+      })
+
 
       return res.json({
         row: row,
