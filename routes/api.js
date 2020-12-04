@@ -19,17 +19,18 @@ module.exports = function (app) {
       var puzzle = req.body.puzzle;
       var coordinate = req.body.coordinate;
       var value = req.body.value;
+
+      // check for empty fields
+      if (!puzzle || !coordinate || !value) {
+        return res.json({
+          error: "Required field(s) missing"
+        })
+      }
+
       var splitCor = coordinate.split('');
       var row = splitCor[0].toLowerCase();
       var column = splitCor[1];
       var rowH
-
-      // empty puzzle string
-      if (!puzzle) {
-        return res.json({
-          error: "Required field missing"
-        })
-      }
 
       // validate puzzle string
       var vString = solver.validate(puzzle);
@@ -43,34 +44,29 @@ module.exports = function (app) {
 
       var rowCheck = row.match(/[^a-i]/g)
       var colCheck = column.match(/[^1-9]/g)
+      var valCheck = value.match(/[^1-9]/g)
 
-      if (colCheck && rowCheck) {
+      if (rowCheck || colCheck) {
         return res.json({
-          error: "Invalid row and column cordinate"
+          error: "Invalid coordinate"
         })
       }
 
-      if (rowCheck) {
+      if (valCheck) {
         return res.json({
-          error: "Invalid row cordinate"
+          error: "Invalid value"
         })
       }
 
-      if (colCheck) {
-        return res.json({
-          error: "Invalid column cordinate"
-        })
-      }
-
-      if(row == 'a') rowH = 0;
-      if(row == 'b') rowH = 1;
-      if(row == 'c') rowH = 2;
-      if(row == 'd') rowH = 3;
-      if(row == 'e') rowH = 4;
-      if(row == 'f') rowH = 5;
-      if(row == 'g') rowH = 6;
-      if(row == 'h') rowH = 7;
-      if(row == 'i') rowH = 8;
+      if (row == 'a') rowH = 0;
+      if (row == 'b') rowH = 1;
+      if (row == 'c') rowH = 2;
+      if (row == 'd') rowH = 3;
+      if (row == 'e') rowH = 4;
+      if (row == 'f') rowH = 5;
+      if (row == 'g') rowH = 6;
+      if (row == 'h') rowH = 7;
+      if (row == 'i') rowH = 8;
 
       var conflict = [];
 
@@ -100,11 +96,6 @@ module.exports = function (app) {
         conflict: conflict
       })
 
-
-      return res.json({
-        row: row,
-        col: column
-      })
     });
 
   app.route('/api/solve')
