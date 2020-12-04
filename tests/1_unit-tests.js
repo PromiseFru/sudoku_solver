@@ -151,9 +151,10 @@ suite('UnitTests', () => {
     // Invalid complete puzzles fail
     test('Invalid puzzles fail', done => {
       const input = '779235418851496372432178956174569283395842761628713549283657194516924837947381625';
+      const error = 'Puzzle cannot be solved'
       var result = solver.solve(input);
 
-      assert.equal(result, 'Invalid Solution')
+      assert.equal(result.error, error)
       done();
     });
 
