@@ -36,7 +36,14 @@ suite('Functional Tests', () => {
         error: 'Required field missing'
       };
 
-      // done();
+      chai.request(server)
+        .post('/api/solve')
+        .send()
+        .end((req, res) => {
+          assert.equal(res.body.error, error.error);
+        })
+
+      done();
     });
 
     test('Invalid Characters in Puzzle', done => {
