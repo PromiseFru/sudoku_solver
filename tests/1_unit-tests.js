@@ -59,7 +59,7 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 3;
 
-      var result = solver.checkRowPlacement(input, row, col, value)
+      var result = solver.checkRowPlacement(input, row, value)
 
       assert.equal(result.valid, true)
       done();
@@ -72,7 +72,7 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 9;
 
-      var result = solver.checkRowPlacement(input, row, col, value);
+      var result = solver.checkRowPlacement(input, row, value);
 
       assert.equal(result.valid, false)
       done();
@@ -88,7 +88,7 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 3;
 
-      var result = solver.checkColPlacement(input, row, col, value)
+      var result = solver.checkColPlacement(input, col, value)
 
       assert.equal(result.valid, true)
       done();
@@ -101,7 +101,7 @@ suite('UnitTests', () => {
       const col = 0;
       const value = 1;
 
-      var result = solver.checkColPlacement(input, row, col, value)
+      var result = solver.checkColPlacement(input, col, value)
 
       assert.equal(result.valid, false)
       done();
