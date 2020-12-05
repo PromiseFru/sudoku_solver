@@ -111,7 +111,18 @@ suite('Functional Tests', () => {
         valid: true
       };
 
-      //done()
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, status);
+        })
+
+      done();
     })
 
     test('All fields filled in correctly, invalid placement, single conflict', done => {
