@@ -28,6 +28,10 @@ module.exports = function (app) {
       }
 
       var splitCor = coordinate.split('');
+      if (splitCor.length > 2) return res.json({
+        error: "Invalid coordinate"
+      })
+
       var row = splitCor[0].toLowerCase();
       var column = splitCor[1];
       var rowH
