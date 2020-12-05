@@ -134,7 +134,18 @@ suite('Functional Tests', () => {
         conflict: ['row']
       };
 
-      //done()
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, status);
+        })
+
+      done();
     })
 
     test('All fields filled in correctly, invalid placement, multiple conflicts', done => {
@@ -146,7 +157,18 @@ suite('Functional Tests', () => {
         conflict: ['row', 'column']
       };
 
-      //done()
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, status);
+        })
+
+      done();
     })
 
     test('All fields filled in correctly, invalid placement, all conflicts', done => {
@@ -158,7 +180,18 @@ suite('Functional Tests', () => {
         conflict: ['row', 'column', 'region']
       };
 
-      //done()
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, status);
+        })
+
+      done();
     })
 
     test('Required Field(s) Missing', done => {
