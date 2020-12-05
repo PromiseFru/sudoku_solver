@@ -199,23 +199,60 @@ suite('Functional Tests', () => {
         error: 'Required field(s) missing'
       };
 
-      // done();
+      chai.request(server)
+        .post('/api/check')
+        .send()
+        .end((req, res) => {
+          assert.deepEqual(res.body, error);
+        })
+
+      done();
     });
 
     test('Invalid Characters in Puzzle', done => {
+      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..o..';
+      const coordinate = "A1";
+      const value = "5";
+
       const error = {
         error: 'Invalid characters in puzzle'
       };
 
-      // done();
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, error);
+        })
+
+      done();
     });
 
     test('Puzzle incorrect length', done => {
+      const input = '..9..5.1.85.4....2432......1...69.83.9.....6.62.71...9......1945....4.37.4.3..66..';
+      const coordinate = "A1";
+      const value = "5";
+
       const error = {
         error: 'Expected puzzle to be 81 characters long'
       };
 
-      // done();
+      chai.request(server)
+        .post('/api/check')
+        .send({
+          puzzle: input,
+          coordinate: coordinate,
+          value: value
+        })
+        .end((req, res) => {
+          assert.deepEqual(res.body, error);
+        })
+
+      done();
     });
 
     test('Coordinate Out of Bounds', done => {
